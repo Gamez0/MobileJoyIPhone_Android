@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "497304514006",
+    "firebase_url": "https://iosandandroidmobilejoy.firebaseio.com",
+    "project_id": "iosandandroidmobilejoy",
+    "storage_bucket": "iosandandroidmobilejoy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497304514006:android:b66d4661133ef4793c4877",
+        "android_client_info": {
+          "package_name": "com.example.mobilejoy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497304514006-7rkoh5vdmsk9r5kpiarrlran1aqmmoba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBreSg3ptVZ0tGRGlehuSuwOcxb9MsWIbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497304514006-7rkoh5vdmsk9r5kpiarrlran1aqmmoba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

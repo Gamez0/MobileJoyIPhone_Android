@@ -35,6 +35,8 @@ dependencies:
   flutter_spinkit: ^4.1.2
   shimmer: ^1.0.1
   fluttertoast: ^4.0.0
+  fancy_bottom_bar: ^0.0.1
+  flutter_point_tab_bar: ^0.1.0
   
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,14 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - images/app_logo.png
+  - images/guitar.png
+  - images/guitar_clicked.png
+  - images/pray.png
+  - images/pray_clicked.png
+  - images/bible.png
+  - images/bible_clicked.png
+  - images/sermon.png
+  - images/sermon_clicked.png
   - icons/pray.svg
   - images/bg.jpg
   #  - images/a_dot_ham.jpeg

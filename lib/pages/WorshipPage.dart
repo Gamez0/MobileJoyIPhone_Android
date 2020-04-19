@@ -1,24 +1,17 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:mobilejoy/Posts/HymnPost.dart';
 import 'package:mobilejoy/Posts/BiblePost.dart';
 import 'package:mobilejoy/Posts/PrayerPost.dart';
 import 'package:mobilejoy/Posts/MessagePost.dart';
-import 'package:mobilejoy/WorshipTab/BiblePage.dart';
-import 'package:mobilejoy/WorshipTab/HymnPage.dart';
-import 'package:mobilejoy/WorshipTab/MessagePage.dart';
-import 'package:mobilejoy/WorshipTab/PrayPage.dart';
-import 'package:mobilejoy/login/Authentication.dart';
 import 'package:mobilejoy/joyicon_icons.dart';
-import 'package:mobilejoy/pages/HomePage.dart';
-import 'package:mobilejoy/pages/QTPage.dart';
+import 'package:mobilejoy/login/Authentication.dart';
 import 'package:mobilejoy/upload/WorshipUpload.dart';
 import '../login/Authentication.dart';
-import '../upload/PhotoUpload.dart';
-import '../Posts/Posts.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_point_tab_bar/pointTabBar.dart';
+import 'package:flutter_point_tab_bar/pointTabIndicator.dart';
 
 class WorshipPage extends StatefulWidget{
   WorshipPage({
@@ -35,9 +28,12 @@ class WorshipPage extends StatefulWidget{
 }
 
 class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStateMixin{
-  // List<Week> _week = Week.getWeeks();
-  // List<DropdownMenuItem<Week>> _dropdownMenuItems;
-  // Week _selectedWeek;
+  bool guitar_visible = false;
+  bool pray_visible = false;
+  bool bible_visible = false;
+  bool sermon_visible = false;
+  // Icondata _guitar = Image.asset("images/guitar_clicked.png", width: 25,);
+
   final List<String> _dropdownValues = [
     "1주차","2주차","3주차","4주차",
     "5주차","6주차","7주차","8주차",
@@ -54,6 +50,10 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
   List<PrayerPosts> thisWeekpraypostsList = [];
   List<BiblePosts> thisWeekbiblepostsList = [];
   List<MessagePosts> thisWeekmessagepostsList = [];
+  
+  
+
+
 
 
   TabController _tabController;
@@ -66,6 +66,12 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
   }
 
   Widget hymnTab() {
+    // setState(() {
+    //   guitar_visible=true;
+    //   pray_visible = false;
+    //   bible_visible = false;
+    //   sermon_visible = false;
+    // });
     bool isEmpty=false;
     bool writePrint=false;
     return Container(
@@ -82,6 +88,12 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
       );
   }
   Widget prayTab(){
+    // setState(() {
+    //   guitar_visible=false;
+    //   pray_visible = true;
+    //   bible_visible = false;
+    //   sermon_visible = false;
+    // });
     bool isEmpty=false;
     bool writePrint=false;
     return Container(
@@ -98,6 +110,12 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
       );
   }
   Widget bibleTab(){
+    // setState(() {
+    //   guitar_visible=false;
+    //   pray_visible = false;
+    //   bible_visible = true;
+    //   sermon_visible = false;
+    // });
     bool isEmpty=false;
     bool writePrint=false;
     return Container(
@@ -114,6 +132,12 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
       );
   }
   Widget messageTab(){
+    // setState(() {
+    //   guitar_visible=false;
+    //   pray_visible = false;
+    //   bible_visible = false;
+    //   sermon_visible = true;
+    // });
     bool isEmpty=false;
     bool writePrint=false;
     return Container(
@@ -163,7 +187,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
     // _selectedWeek = _dropdownMenuItems[0].value;
     super.initState();
     _tabController = new TabController(vsync: this, initialIndex: 0,length: 5);
-
+    _tabController.addListener(_handleTabSelection);
     DatabaseReference hymnpostsRef = FirebaseDatabase.instance.reference().child("hymnPosts");
     DatabaseReference praypostsRef = FirebaseDatabase.instance.reference().child("prayPosts");
     DatabaseReference biblepostsRef = FirebaseDatabase.instance.reference().child("biblePosts");
@@ -253,6 +277,13 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
     super.dispose();
   }
 
+  void _handleTabSelection(){
+    setState(() {
+      //여기서 opacity 값 조정
+
+    });
+  }
+
   void _logoutUser() async{
     try{
       await widget.auth.SignOut();
@@ -264,15 +295,33 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     getWeek();
+    precacheImage(AssetImage("images/guitar.png"), context);
+    precacheImage(AssetImage("images/guitar_clicked.png"), context);
+    precacheImage(AssetImage("images/pray.png"), context);
+    precacheImage(AssetImage("images/pray_clicked.png"), context);
+    precacheImage(AssetImage("images/bible.png"), context);
+    precacheImage(AssetImage("images/bible_clicked.png"), context);
+    precacheImage(AssetImage("images/sermon.png"), context);
+    precacheImage(AssetImage("images/sermon_clicked.png"), context);
+
+    ImageProvider guitar_clicked2 = AssetImage("images/guitar_clicked.png");
+    ImageProvider pray_clicked2 = AssetImage("images/pray_clicked.png");
+    ImageProvider bible_clicked2 = AssetImage("images/bible_clicked.png");
+    ImageProvider sermon_clicked2 = AssetImage("images/sermon_clicked.png");
+
+    ImageIcon guitar_clicked = ImageIcon(AssetImage("images/guitar_clicked.png"), color: Theme.of(context).accentColor,);
+    ImageIcon pray_clicked = ImageIcon(AssetImage("images/pray_clicked.png"), color: Theme.of(context).accentColor,);
+    ImageIcon bible_clicked = ImageIcon(AssetImage("images/bible_clicked.png"), color: Theme.of(context).accentColor,);
+    ImageIcon sermon_clicked = ImageIcon(AssetImage("images/sermon_clicked.png"), color: Theme.of(context).accentColor,);
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).accentColor,
+        // backgroundColor: Theme.of(context).accentColor,
         title: new Text(
           "JOY 예배",
           style: TextStyle(
             fontFamily: 'poetAndMe',
-            color: Colors.white
+            // color: Theme.of(context).accentColor
             ),
             
           ),
@@ -284,30 +333,58 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Theme.of(context).accentColor,
-          labelColor: Colors.white,
+          labelColor: Theme.of(context).accentColor,
           unselectedLabelColor: Theme.of(context).textTheme.caption.color,
           isScrollable: false,
+          indicator: PointTabIndicator(
+            position: PointTabIndicatorPosition.bottom,
+            color: Theme.of(context).accentColor,
+            insets: EdgeInsets.only(bottom: 6),
+          ),
           tabs: <Tab>[
             Tab(
               text: "찬양",
-              icon: new Icon(Joyicon.hymn),
-              
+              // icon: guitar_clicked,
+              // icon : ImageIcon(guitar_clicked2, color: Theme.of(context).accentColor,)
+              // icon: new Image.asset("images/guitar_clicked.png", width: 25,),
+              icon: new Image.asset(_tabController.index==0?"images/guitar_clicked.png":"images/guitar.png", width: 25, color: _tabController.index==0? Theme.of(context).accentColor:Colors.black,),
+              // icon: new Icon(Joyicon.hymn),
+              // icon: AnimatedOpacity(
+              //   opacity: guitar_visible? 1.0:0.0,
+              //   duration: Duration(milliseconds: 500),
+              //   child:new Image.asset("images/guitar.png", width: 25,),
+              //   ),
+              // child :AnimatedOpacity(
+              //   opacity: guitar_visible? 0.0:1.0,
+              //   duration: Duration(milliseconds: 500),
+              //   child: new Image.asset("images/guitar_clicked.png", width: 25,),
+              //   ),
             ),
             Tab(
               text: "기도문",
-              icon: new Icon(Joyicon.prey),
+              // icon : pray_clicked,
+              // icon : ImageIcon(AssetImage("images/pray_clicked.png"), color: Theme.of(context).accentColor,)
+              // icon: new Image.asset("images/pray_clicked.png", width: 25,),
+              icon: new Image.asset(_tabController.index==1?"images/pray_clicked.png":"images/pray.png", width: 25,color: _tabController.index==1? Theme.of(context).accentColor:Colors.black,),
             ),
             Tab(
               text: "말씀",
-              icon: new Icon(Joyicon.bible),
+              // icon : bible_clicked,
+              // icon : ImageIcon(AssetImage("images/bible_clicked.png"), color: Theme.of(context).accentColor,)
+              // icon: new Image.asset("images/bible_clicked.png", width: 25,),
+              icon: new Image.asset(_tabController.index==2?"images/bible_clicked.png":"images/bible.png", width: 25,color: _tabController.index==2? Theme.of(context).accentColor:Colors.black,),
             ),
             Tab(
               text: "메시지",
-              icon: new Icon(Joyicon.sermon),
+              // icon : sermon_clicked,
+              // icon : ImageIcon(AssetImage("images/sermon_clicked.png"), color: Theme.of(context).accentColor,)
+              // icon: new Image.asset("images/sermon_clicked.png", width: 25,),
+              icon: new Image.asset(_tabController.index==3?"images/sermon_clicked.png":"images/sermon.png", width: 25,color: _tabController.index==3? Theme.of(context).accentColor:Colors.black,),
             ),
             Tab(
               // text:"주차",
               child: dropdownWidget(),
+              
               ),
           ],
         ),
@@ -319,7 +396,6 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
           prayTab(),
           bibleTab(),
           messageTab(),
-          // dropdownWidget(),
           notification(),
         ],
       ),
@@ -345,7 +421,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
 
   Widget PostsUI(String title, String description, String date, String week){
     return new Card(
-      elevation: 10.0,
+      // elevation: 10.0,
       margin: EdgeInsets.all(15.0),
 
       child: new Container(
@@ -355,42 +431,43 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                  new Text(
-                  date,
-                  style: Theme.of(context).textTheme.subtitle,
-                  textAlign: TextAlign.center,
-                ),
-                
-                new Text(
-                  week,
-                  style: Theme.of(context).textTheme.subtitle,
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-            SizedBox(height: 10.0,),
-
-            new Text(
+            new Text(//제목
                   title,
                   style: Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
                 ),
 
             SizedBox(height: 10.0,),
-            new Text(
+            new Text(//내용
                   description,
                   style: Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
-                )
+                ),
+            SizedBox(height: 10.0,), 
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                  // new Text(//Apr 10, 2020
+                  //   date,
+                  //   style: Theme.of(context).textTheme.subtitle,
+                  //   textAlign: TextAlign.center,
+                  // ),
+                
+                  new Text(//1주차
+                    week+" "+date,
+                    style: Theme.of(context).textTheme.overline,
+                    textAlign: TextAlign.center,
+                  )
+              ],
+            ),   
           ],
         ),
       ),
     );
     
   }
+
   void getWeek(){
     thisWeekpraypostsList.clear();
     thisWeekbiblepostsList.clear();

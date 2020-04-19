@@ -34,7 +34,7 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, initialIndex: 0,length: 2);
-
+    _tabController.addListener(_handleTabSelection);
     DatabaseReference postsRef = FirebaseDatabase.instance.reference().child("QTPosts");
 
     postsRef.once().then((DataSnapshot snap){
@@ -66,7 +66,12 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
     _tabController.dispose();
     super.dispose();
   }
-  
+  void _handleTabSelection(){
+    setState(() {
+      //여기서 opacity 값 조정
+
+    });
+  }
   void _logoutUser() async{
     try{
       await widget.auth.SignOut();
@@ -77,6 +82,8 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
   }
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("images/bible.png"), context);
+    precacheImage(AssetImage("images/qt_clicked.png"), context);
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
@@ -84,10 +91,10 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
           "QT",
           style: TextStyle(
             fontFamily: 'poetAndMe',
-            color: Colors.white,
+            // color: Theme.of(context).accentColor
             ),
           ),
-        backgroundColor: Theme.of(context).accentColor,  
+        // backgroundColor: Theme.of(context).accentColor,  
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(30),
@@ -97,7 +104,7 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
           
           controller: _tabController,
           indicatorColor: Theme.of(context).accentColor,
-          labelColor: Colors.white,
+          labelColor: Theme.of(context).accentColor,
           unselectedLabelColor: Theme.of(context).textTheme.caption.color,
           isScrollable: false,
           
@@ -105,11 +112,11 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
           tabs: <Tab>[
             Tab(
               text: "본문",
-              icon: new Icon(Joyicon.bible),
+              icon: new Image.asset(_tabController.index==0?"images/bible_clicked.png":"images/bible.png", width: 25,color: _tabController.index==0? Theme.of(context).accentColor:Colors.black,),
             ),
             Tab(
               text: "나눔",
-              icon: new Icon(Joyicon.qt),
+              icon: new Image.asset(_tabController.index==1?"images/qt_clicked.png":"images/qt.png", width: 25,color: _tabController.index==1? Theme.of(context).accentColor:Colors.black,),
             ),
           ],
         ),
@@ -143,7 +150,7 @@ class _QTPageState extends State<QTPage> with SingleTickerProviderStateMixin{
 
   Widget PostsUI(String author, String bible, String description, String date, String time){
     return new Card(
-      elevation: 10.0,
+      // elevation: 10.0,
       margin: EdgeInsets.all(15.0),
 
       child: new Container(

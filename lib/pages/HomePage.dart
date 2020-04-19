@@ -92,10 +92,10 @@ class _HomePageState extends State<HomePage>{
           "JOY 사진",
           style: TextStyle(
             fontFamily: 'poetAndMe',
-            color: Colors.white
+            // color: Theme.of(context).accentColor
             ),
           ),
-        backgroundColor: Theme.of(context).accentColor,
+        // backgroundColor: Theme.of(context).accentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(30),
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage>{
 
   Widget PostsUI(String image, String description, String date, String time){
     return new Card(
-      elevation: 10.0,
+      // elevation: 10.0,
       margin: EdgeInsets.all(15.0),
 
       child: new Container(
@@ -141,6 +141,7 @@ class _HomePageState extends State<HomePage>{
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
+            // new Image.asset("images/qt.png"),
             new Image.network(
               image,
               // height: 170,

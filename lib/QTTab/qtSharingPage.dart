@@ -85,7 +85,7 @@ class _qtSharingPage extends State<qtSharingPage>{
 
   Widget PostsUI(String author, String bible, String description, String date, String time){
     return new Card(
-      elevation: 10.0,
+      // elevation: 10.0,
       margin: EdgeInsets.all(15.0),
 
       child: new Container(

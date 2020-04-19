@@ -104,12 +104,12 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>{
       key: scaffoldKey,
       appBar: new AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).accentColor,
+        // backgroundColor: Theme.of(context).accentColor,
         title: new Text(
           "사진 업로드",
           style: TextStyle(
             fontFamily: 'poetAndMe',
-            color: Colors.white
+            color: Theme.of(context).accentColor
             ),
           ),
       

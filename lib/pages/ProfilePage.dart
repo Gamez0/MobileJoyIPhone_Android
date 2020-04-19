@@ -97,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage>{
 
   Widget PostsUI(String image, String description, String date, String time){
     return new Card(
-      elevation: 10.0,
+      // elevation: 10.0,
       margin: EdgeInsets.all(15.0),
 
       child: new Container(

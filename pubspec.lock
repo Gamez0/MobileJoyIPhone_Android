@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  fancy_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: fancy_bottom_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   firebase:
     dependency: transitive
     description:
@@ -146,6 +153,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.6"
+  flutter_point_tab_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_point_tab_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   flutter_spinkit:
     dependency: "direct main"
     description:

@@ -5,7 +5,10 @@ import 'pages/ProfilePage.dart';
 import 'pages/QTPage.dart';
 import 'pages/WorshipPage.dart';
 import 'login/Authentication.dart';
-import 'package:fancy_bar/fancy_bar.dart';
+// import 'package:fancy_bar/fancy_bar.dart';
+import 'package:fancy_bottom_bar/fancy_bottom_bar.dart';
+import 'package:fancy_bottom_bar/fancy_bottom_item.dart';
+import 'package:fancy_bottom_bar/tap_ring.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({
@@ -24,6 +27,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("images/bible.png"), context);
+    precacheImage(AssetImage("images/qt.png"), context);
     return Scaffold(
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
@@ -38,22 +43,32 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar:
         FancyBottomBar(
-        type: FancyType.FancyV2,   // Fancy Bar Type
-        selectedIndex: 2,
+          
+        // type: FancyType.FancyV2,   // Fancy Bar Type
+        // selectedIndex: 2,
         items: [
-          FancyItem(
-            textColor: Theme.of(context).accentColor,
-            title: '예배',
-            icon: Icon(Joyicon.bible),
+          FancyBottomItem(
+            // textColor: Theme.of(context).accentColor,
+            title: Text("예배", style: TextStyle(
+            fontFamily: 'poetAndMe',
+            color: Theme.of(context).accentColor
+            ),),
+            icon: new Image.asset("images/bible.png", width: 30,),
           ),
-          FancyItem(
-            textColor: Theme.of(context).accentColor,
-            title: '큐티',
-            icon: Icon(Joyicon.qt,),
+          FancyBottomItem(
+            // textColor: Theme.of(context).accentColor,
+            title: Text("큐티", style: TextStyle(
+            fontFamily: 'poetAndMe',
+            // color: Theme.of(context).accentColor
+            ),),
+            icon: new Image.asset("images/qt.png", width: 30,),
           ),
-          FancyItem(
-            textColor: Theme.of(context).accentColor,
-            title: '사진',
+          FancyBottomItem(
+            // textColor: Theme.of(context).accentColor,
+            title: Text("사진", style: TextStyle(
+            fontFamily: 'poetAndMe',
+            color: Theme.of(context).accentColor
+            ),),
             icon: Icon(Icons.photo_camera),
           ),
           // FancyItem(
@@ -64,8 +79,10 @@ class _MainScreenState extends State<MainScreen> {
         ],
         onItemSelected: (index) {
           navigationTapped(index);
+          _page=index;
           // print(index);
         },
+        selectedPosition: _page,
       ),
     );
   }

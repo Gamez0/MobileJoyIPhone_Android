@@ -80,7 +80,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
           itemCount: thisWeekhymnpostsList.length,
           itemBuilder: (_, index){
             if(thisWeekhymnpostsList.length !=0){
-              return PostsUI(thisWeekhymnpostsList[index].title,thisWeekhymnpostsList[index].description,thisWeekhymnpostsList[index].date,thisWeekhymnpostsList[index].week,);
+              return PostsUI(thisWeekhymnpostsList[index].title,thisWeekhymnpostsList[index].description,thisWeekhymnpostsList[index].date,thisWeekhymnpostsList[index].week,true);
               }        
             }, 
           ),
@@ -102,7 +102,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
           itemCount: thisWeekpraypostsList.length,
           itemBuilder: (_, index){
             if(thisWeekpraypostsList.length !=0){
-                return PostsUI(thisWeekpraypostsList[index].title,thisWeekpraypostsList[index].description,thisWeekpraypostsList[index].date,thisWeekpraypostsList[index].week,);
+                return PostsUI(thisWeekpraypostsList[index].title,thisWeekpraypostsList[index].description,thisWeekpraypostsList[index].date,thisWeekpraypostsList[index].week,false);
               }        
             }, 
           ),
@@ -124,7 +124,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
           itemCount: thisWeekbiblepostsList.length,
           itemBuilder: (_, index){
             if(thisWeekbiblepostsList.length !=0){
-              return PostsUI(thisWeekbiblepostsList[index].title,thisWeekbiblepostsList[index].description,thisWeekbiblepostsList[index].date,thisWeekbiblepostsList[index].week,);
+              return messagePostsUI(thisWeekbiblepostsList[index].title,thisWeekbiblepostsList[index].description,thisWeekbiblepostsList[index].date,thisWeekbiblepostsList[index].week,true);
               }        
             }, 
           ),
@@ -146,7 +146,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
           itemCount: thisWeekmessagepostsList.length,
           itemBuilder: (_, index){
             if(thisWeekmessagepostsList.length !=0){
-              return PostsUI(thisWeekmessagepostsList[index].title,thisWeekmessagepostsList[index].description,thisWeekmessagepostsList[index].date,thisWeekmessagepostsList[index].week,);
+              return messagePostsUI(thisWeekmessagepostsList[index].title,thisWeekmessagepostsList[index].description,thisWeekmessagepostsList[index].date,thisWeekmessagepostsList[index].week,false);
               }         
             }, 
           ),
@@ -419,7 +419,7 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
     );
   }
 
-  Widget PostsUI(String title, String description, String date, String week){
+  Widget PostsUI(String title, String description, String date, String week, bool hymn){
     return new Card(
       // elevation: 10.0,
       margin: EdgeInsets.all(15.0),
@@ -428,20 +428,74 @@ class _WorshipPageState extends State<WorshipPage> with SingleTickerProviderStat
         padding: new EdgeInsets.all(14.0),
 
         child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
             new Text(//제목
                   title,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: hymn? Theme.of(context).textTheme.title:Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
+                  
                 ),
 
             SizedBox(height: 10.0,),
             new Text(//내용
                   description,
                   style: Theme.of(context).textTheme.subhead,
+                  textAlign: TextAlign.start,
+                ),
+            SizedBox(height: 10.0,), 
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                  // new Text(//Apr 10, 2020
+                  //   date,
+                  //   style: Theme.of(context).textTheme.subtitle,
+                  //   textAlign: TextAlign.center,
+                  // ),
+                
+                  new Text(//1주차
+                    week+" "+date,
+                    style: Theme.of(context).textTheme.overline,
+                    textAlign: TextAlign.center,
+                  )
+              ],
+            ),   
+          ],
+        ),
+      ),
+    );
+  }
+  Widget messagePostsUI(String title, String description, String date, String week, bool bible){
+    return new Card(
+      // elevation: 10.0,
+      margin: EdgeInsets.all(15.0),
+
+      child: new Container(
+        padding: new EdgeInsets.all(14.0),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Colors.black,width: 2.0)
+          )
+        ),
+        child: new Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          
+          children: <Widget>[
+            new Text(//제목
+                  bible? title:"메신저 "+title,
+                  style: Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
+
+                ),
+
+            SizedBox(height: 15.0,),
+            
+            new Text(//내용
+                  description,
+                  style: Theme.of(context).textTheme.subhead,
+                  textAlign: TextAlign.start,
                 ),
             SizedBox(height: 10.0,), 
             new Row(

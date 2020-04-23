@@ -99,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen>{
                         style: TextStyle(
                             // color: Theme.of(context).accentColor,
                             // fontWeight: FontWeight.bold,
-                            fontSize: 25.0),
+                            fontSize: 35.0),
                             textAlign: TextAlign.center,
                       )
                     ],
@@ -123,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen>{
                       style: TextStyle(
                           // fontWeight: FontWeight.bold,
                           fontSize: 16.0,
-                          color: Theme.of(context).accentColor),
+                          color: Colors.grey),
                      )
                   ],
                 ),

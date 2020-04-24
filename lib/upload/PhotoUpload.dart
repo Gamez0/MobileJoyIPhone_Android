@@ -173,10 +173,15 @@ class _UploadPhotoPageState extends State<UploadPhotoPage>{
               SizedBox(height: 15.0,),
 
               RaisedButton(
-                  elevation: 10.0,
-                  child: Text("은혜 나누기"),
-                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  padding: EdgeInsets.all(12),
                   color: Theme.of(context).accentColor,
+                    elevation: 10.0,
+                  child: Text("은혜 나누기", style: TextStyle(color: Colors.white),),
+                  textColor: Colors.white,
+                  
 
                   onPressed: sampleImage==null?
                   getImage:uploadStatusImage,

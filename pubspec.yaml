@@ -27,9 +27,12 @@ dependencies:
   flutter_svg: ^0.15.0
   intl: ^0.15.7
   image_picker:
-  firebase_auth:
+  firebase_auth: ^0.16.0
   firebase_database:
   firebase_storage:
+  firebase_core: ^0.4.4+3
+  cloud_firestore: ^0.13.5
+  firebase_messaging: ^6.0.13
   webview_flutter: ^0.3.0
   fancy_bar: ^1.2.0
   flutter_spinkit: ^4.1.2

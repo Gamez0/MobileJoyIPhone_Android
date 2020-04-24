@@ -4,6 +4,11 @@ import 'package:mobilejoy/login/Mapping.dart';
 import 'dart:async';
 import 'login/Authentication.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
@@ -24,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen>{
   @override
   void initState(){
     super.initState();
+    firebaseCloudMessaging_Listeners();
     Random random = new Random();
     int num = random.nextInt(5);
     
@@ -133,5 +139,35 @@ class _SplashScreenState extends State<SplashScreen>{
         ],
       ),
     );
+  }
+  void firebaseCloudMessaging_Listeners() {
+    if (Platform.isIOS) iOS_Permission();
+
+    _firebaseMessaging.getToken().then((token){
+      print('token:'+token);
+    });
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+      },
+    );
+  }
+
+  void iOS_Permission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true)
+    );
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings)
+    {
+      print("Settings registered: $settings");
+    });
   }
 }
